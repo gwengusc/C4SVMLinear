@@ -1,2 +1,2 @@
 # C4SVMLinear
-This is a project for pedestrian detection for Opencv and C4.
+This is a project for pedestrian detection based on Opencv and C4.
