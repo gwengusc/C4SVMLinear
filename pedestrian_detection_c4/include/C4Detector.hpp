@@ -104,8 +104,6 @@ public:
         original.Load(src);
 
         detectedRects.clear();
-        std::cout<<"--------MultiDetecte-1-----------"<<std::endl;
-
 
         if (original.nrow < feature.HUMAN_height + 5 || original.ncol < feature.HUMAN_width + 5) {
             std::cout<<"the size of the image is too small"<<endl;
@@ -114,14 +112,12 @@ public:
 
         const int hd = feature.HUMAN_height / feature.HUMAN_xdiv;//108/9=12
         const int wd = feature.HUMAN_width / feature.HUMAN_ydiv;//36/4=9
-        std::cout<<"--------MultiDetecte-2-----------"<<std::endl;
         InitImage(original);
         // results.clear();
 
         // hist.Create(1, baseflength * (feature.HUMAN_xdiv - EXT) * (feature.HUMAN_ydiv - EXT));
         int oheight = original.nrow, owidth = original.ncol;
         cv::Rect rect;
-        std::cout<<"--------MultiDetecte-3-----------"<<std::endl;
 
         while (image.nrow >= feature.HUMAN_height && image.ncol >= feature.HUMAN_width) {
 
@@ -141,8 +137,6 @@ public:
             }
             ResizeImage(ratio);
         }
-
-        std::cout<<"--------MultiDetecte-4-----------"<<std::endl;
 
         return detectedRects;
 //        return 0;
