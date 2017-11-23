@@ -73,15 +73,20 @@ public:
             double *p3 = sobel.p[i + 1];
             int *ctp = ct.p[i];
             for (int j = 2; j < sobel.ncol - 2; j++) {
-                int index = 0;
-                if (p2[j] <= p1[j - 1]) index += 0x80;
-                if (p2[j] <= p1[j]) index += 0x40;
-                if (p2[j] <= p1[j + 1]) index += 0x20;
-                if (p2[j] <= p2[j - 1]) index += 0x10;
-                if (p2[j] <= p2[j + 1]) index += 0x08;
-                if (p2[j] <= p3[j - 1]) index += 0x04;
-                if (p2[j] <= p3[j]) index += 0x02;
-                if (p2[j] <= p3[j + 1]) index++;
+                
+                //the new code for accelerating
+                int index = model[0][p2[j] <= p1[j - 1]]  + model[1][p2[j] <= p1[j]]  + model[2][p2[j] <= p1[j + 1]]+
+                                    +model[3][p2[j] <= p2[j - 1]] + model[4][p2[j] <= p2[j + 1]] + model[5][p2[j] <= p3[j - 1]] +
+                                    model[6][p2[j] <= p3[j]] + model[7][p2[j] <= p3[j + 1]];
+
+//                 if (p2[j] <= p1[j - 1]) index += 0x80;
+//                 if (p2[j] <= p1[j]) index += 0x40;
+//                 if (p2[j] <= p1[j + 1]) index += 0x20;
+//                 if (p2[j] <= p2[j - 1]) index += 0x10;
+//                 if (p2[j] <= p2[j + 1]) index += 0x08;
+//                 if (p2[j] <= p3[j - 1]) index += 0x04;
+//                 if (p2[j] <= p3[j]) index += 0x02;
+//                 if (p2[j] <= p3[j + 1]) index++;
                 ctp[j] = index;
             }
         }
